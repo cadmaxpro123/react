@@ -1,0 +1,47 @@
+.survey-form, .architecture-form, .urban-form, .engineering-form, .JDA-form, .GIS-form, .site-form, .area-form, .sector-form, .print-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px; /* Space between the fields */
+  }
+  
+  .survey-form .form-group, .architecture-form .form-group, .urban-form .form-group, .engineering-form .form-group, .JDA-form .form-group, .GIS-form .form-group, .site-form .form-group, .area-form .form-group, .sector-form .form-group, .print-form .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .survey-form .form-input, .architecture-form .form-input, .urban-form .form-input, .engineering-form .form-input, .JDA-form .form-input, .GIS-form .form-input, .site-form .form-input, .area-form .form-input, .sector-form .form-input, .print-form .form-input {
+    padding: 8px;
+    font-size: 14px;
+  }
+  
+  .submit-btn {
+    grid-column: span 1; /* Submit button takes only one column */
+    padding: 8px 16px; /* Reduced padding */
+    justify-self: start;
+  }
+  
+  .final-field {
+    grid-column: span 1; /* Ensure the last field is placed beside the submit button */
+  }
+  
+  .submit-btn {
+    background-color: #3498db;
+    color: white;
+    font-size: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+  }
+  
+  .submit-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  .submit-btn:focus {
+    outline: none;
+  }
+  
+  

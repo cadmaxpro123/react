@@ -1,0 +1,95 @@
+/* Profile Page Styling */
+.CustomerDetails-page {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  /* Header with username and job role */
+  .CustomerDetails-header {
+    width: 100%;
+    background: linear-gradient(135deg, #2980b9, #8e44ad); /* Gradient from blue to purple */
+    color: white;
+    padding: 30px 0; /* Added more vertical padding */
+    text-align: center;
+    border-radius: 20px 20px 20px 20px; /* More rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow for more depth */
+    margin-bottom: 40px; /* More margin at the bottom */
+  }
+  
+  /* Container for the profile info (username and job role) */
+  .CustomerDetails-info {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+/* Flexbox to align username and job role vertically */
+.CustomerDetails-info .username-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .username {
+    font-size: 36px; /* Larger font for username */
+    font-weight: 600; /* Bold and prominent text */
+    margin: 0;
+    line-height: 1.2;
+    word-wrap: break-word; /* Ensures the text breaks onto the next line if needed */
+
+  }
+  
+  .status {
+    font-size: 20px; /* Slightly larger job role text */
+    font-weight: 400;
+    margin-top: 10px;
+    opacity: 0.85;
+    text-transform: uppercase; /* Capitalized job role */
+    word-wrap: break-word; /* Ensures text breaks onto next line if needed */
+    margin-bottom: auto;
+  }
+
+ /* Dropdown container centered in the page */
+.dropdown-container {
+  display: flex;
+  flex-direction: column;  /* Stack the h3 tag and dropdown vertically */
+  justify-content: center; /* Center them vertically within the container */
+  align-items: center;     /* Center them horizontally within the container */
+  padding: 20px;
+  background-color: white; /* Optional background color for the dropdown section */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for the dropdown box */
+  border-radius: 8px;      /* Optional rounded corners */
+  width: 80%;              /* Adjust the width of the dropdown container */
+  max-width: 600px;        /* Ensure the container doesn't get too wide */
+  margin: 0 auto;          /* Center the container in the middle of the page */
+}
+
+/* Centered h3 tag styling */
+.dropdown-container h3 {
+  font-size: 18px;
+  margin-bottom: 15px;  /* Add some space below the h3 tag */
+  text-align: center;   /* Center the h3 text horizontally */
+}
+
+/* Dropdown styling */
+.dropdown {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;            /* Make the dropdown take the full width of the container */
+  max-width: 400px;       /* Limit the dropdown width */
+}
+
+/* Styling for the selected option */
+.selected-option {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #007BFF;
+}

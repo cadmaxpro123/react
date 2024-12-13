@@ -1,0 +1,498 @@
+/* Overall Body and Dashboard Layout */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  position: relative; /* Needed to position the top-right section relative to the layout */
+}
+
+/* Sidebar */
+.sidebar {
+  width: 200px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.company-logo {
+  width: 100px;
+  height: auto;
+}
+
+.nav-links {
+  width: 100%;
+}
+
+.nav-link {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: #007bff;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Header and company title */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.company-title {
+  font-family: 'Roboto', sans-serif;  /* Use a modern, clean font */
+  font-size: 2.5rem;  /* Increase the font size for prominence */
+  font-weight: bold;  /* Make the title bold */
+  color: #4A90E2;  /* A nice, professional blue color */
+  letter-spacing: 1px;  /* Slightly spread the letters */
+  text-transform: uppercase;  /* Make the title uppercase for emphasis */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);  /* Subtle shadow for depth */
+  margin: 0;
+  padding: 10px 0;
+  transition: all 0.3s ease;  /* Smooth transition for hover effects */
+}
+
+.company-title:hover {
+  color: #0072ff;  /* Slight color change on hover for interactivity */
+  transform: scale(1.05);  /* Slight zoom effect on hover */
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);  /* Deeper shadow effect */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styles for Customer Page Box */
+.customer-box {
+  width: 400px; /* Fixed width for the box */
+  padding: 20px;
+  margin: 20px auto; /* Centered horizontally */
+  border: 2px solid #ccc; /* Border for the box */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #fff; /* Background color */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for a floating effect */
+  text-align: center;
+}
+
+.select-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.select-customer {
+  width: 100%; /* Full-width dropdown */
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.or-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.or-divider span {
+  margin: 0 10px;
+  color: #888;
+}
+
+.add-customer-btn {
+  width: 100%; /* Full-width button */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.add-customer-btn:hover {
+  background-color: #0056b3;
+}
+
+/* New Customer Form Styles */
+.new-customer-form {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 350px; /* Fixed width for the form */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.new-customer-form h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Includes padding and border in the element's width */
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.back-btn {
+  background-color: #f8f9fa;
+  color: #007bff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.back-btn:hover {
+  background-color: #e9ecef;
+}
+
+/* Profile section in the top-right corner */
+.profile-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.profile-logo {
+  width: 40px; /* Set the size for the profile logo */
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem; /* Adjusted for emoji */
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Styles for Working Page Box */
+.working-box {
+  width: 600px; /* Adjusted width for more content */
+  padding: 20px;
+  margin: 20px auto; /* Centered horizontally */
+  border: 2px solid #ccc; /* Border for the box */
+  border-radius: 10px; /* Rounded corners */
+  background-color: #fff; /* White background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+  text-align: center;
+}
+
+.working-box h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center; /* Centered heading */
+}
+
+.working-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Space between elements */
+}
+
+.working-item {
+  background-color: #f9f9f9; /* Light background for content */
+  padding: 15px;
+  border: 1px solid #ccc; /* Subtle border */
+  border-radius: 5px;
+}
+
+.working-item h4 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.working-item p {
+  font-size: 1rem;
+  color: #555; /* Grey color for text */
+}
+.select-department{
+  width: 100%;
+  text-align: center;
+  margin-bottom: inherit;
+}
+
+.working-action-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  align-self: center; /* Center button */
+}
+
+.working-action-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  /* Adjust top-right profile section for smaller screens */
+  .profile-container {
+      top: 10px;
+      right: 10px;
+      flex-direction: column; /* Stack profile info vertically */
+      align-items: flex-start; /* Align to the left for better spacing */
+  }
+
+  .profile-emoji {
+      width: 35px;
+      height: 35px;
+      font-size: 1.2rem; /* Smaller font size for smaller screens */
+  }
+
+ 
+}
+
+/* Further responsiveness for mobile screens */
+@media (max-width: 480px) {
+  /* Adjust for very small screens */
+  .profile-container {
+      top: 5px;
+      right: 5px;
+      flex-direction: row; /* Make the profile info horizontally aligned again */
+      gap: 8px;
+  }
+
+  .profile-emoji {
+      width: 30px;
+      height: 30px;
+      font-size: 1rem; /* Adjust logo size for tiny screens */
+  }
+
+  
+}
+
+.survey-form, .architecture-form, .urban-form, .engineering-form, .JDA-form, .GIS-form, .site-form, .area-form, .sector-form, .print-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px; /* Space between the fields */
+}
+
+.survey-form .form-group, .architecture-form .form-group, .urban-form .form-group, .engineering-form .form-group, .JDA-form .form-group, .GIS-form .form-group, .site-form .form-group, .area-form .form-group, .sector-form .form-group, .print-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.survey-form .form-input, .architecture-form .form-input, .urban-form .form-input, .engineering-form .form-input, .JDA-form .form-input, .GIS-form .form-input, .site-form .form-input, .area-form .form-input, .sector-form .form-input, .print-form .form-input {
+  padding: 8px;
+  font-size: 14px;
+}
+
+.submit-btn {
+  grid-column: span 1; /* Submit button takes only one column */
+  padding: 8px 16px; /* Reduced padding */
+  justify-self: start;
+}
+
+.final-field {
+  grid-column: span 1; /* Ensure the last field is placed beside the submit button */
+}
+
+
+/* Confirmation Popup */
+.confirmation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  width: 300px;
+}
+
+.popup-content h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.confirm-btn,
+.cancel-btn {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 120px;
+}
+
+.confirm-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: #218838;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #c82333;
+}
+
+
+
+.profile-icon {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.profile-emoji {
+  font-size: 28px;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100px;
+  z-index: 1000;
+}
+
+.profile-dropdown p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.profile-dropdown strong {
+  font-weight: bold;
+}
+
+
+
+/* Log Out Button Styling */
+.logout-btn {
+  cursor: pointer;
+  padding: 5px;
+  width: 100%;
+  font-size: 16px;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-btn:hover {
+  background-color: #ddd;
+}
+
+
+.profile-btn {
+  cursor: pointer;
+  padding: 5px;
+  font-size: 16px;
+  width:100%;
+  background-color: #f4f4f4;
+  border-radius: 5px;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px
+}
+
+.profile-btn:hover {
+  background-color: #ddd;
+}

@@ -1,0 +1,125 @@
+/* Profile Page Styling */
+.profile-page {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  /* Header with username and job role */
+  .profile-header {
+    width: 100%;
+    background: linear-gradient(45deg, #ff6b6b, #f39c12); /* Gradient background from pink to yellow */
+    color: white;
+    padding: 30px 0; /* Added more vertical padding */
+    text-align: center;
+    border-radius: 20px 20px 20px 20px; /* More rounded corners */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow for more depth */
+    margin-bottom: 40px; /* More margin at the bottom */
+  }
+  
+  /* Container for the profile info (username and job role) */
+  .profile-info {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 10px;
+  }
+  
+/* Flexbox to align username and job role vertically */
+.profile-info .username-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .username {
+    font-size: 36px; /* Larger font for username */
+    font-weight: 600; /* Bold and prominent text */
+    margin: 0;
+    line-height: 1.2;
+    word-wrap: break-word; /* Ensures the text breaks onto the next line if needed */
+
+  }
+  
+  .job-role {
+    font-size: 20px; /* Slightly larger job role text */
+    font-weight: 400;
+    margin-top: 10px;
+    opacity: 0.85;
+    text-transform: uppercase; /* Capitalized job role */
+    word-wrap: break-word; /* Ensures text breaks onto next line if needed */
+
+  }
+  
+  /* Optional: Avatar icon next to the username */
+  .profile-header .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #fff;
+    margin-right: 15px;
+    display: inline-block;
+    vertical-align: middle;
+    background-image: url('https://i.pravatar.cc/150?img=3'); /* Example avatar */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .profile-header .profile-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 15px;
+  }
+
+
+  /* MEDIA QUERIES FOR RESPONSIVENESS */
+
+/* For screens smaller than 768px (tablets, small laptops, etc.) */
+@media (max-width: 768px) {
+    .username {
+      font-size: 28px; /* Slightly smaller font size for username */
+    }
+  
+    .job-role {
+      font-size: 18px; /* Slightly smaller font size for job role */
+    }
+  
+    .profile-header {
+      padding: 30px 0; /* Reduce padding for smaller screens */
+    }
+  
+    .avatar {
+      width: 50px;
+      height: 50px; /* Smaller avatar size */
+    }
+  
+   
+  }
+  
+  /* For screens smaller than 480px (mobile devices) */
+  @media (max-width: 480px) {
+    .username {
+      font-size: 24px; /* Further reduce font size for mobile */
+    }
+  
+    .job-role {
+      font-size: 16px; /* Further reduce font size for job role */
+    }
+  
+    .profile-header {
+      padding: 20px 0; /* Even less padding for very small screens */
+    }
+  
+    .avatar {
+      width: 40px;
+      height: 40px; /* Even smaller avatar */
+    }
+  
+    
+  }
