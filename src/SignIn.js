@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -18,6 +18,23 @@ const SignIn = () => {
   const [showFields, setShowFields] = useState(false);
   const [showOrgField, setShowOrgField] = useState(false);
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    // Push a dummy state to history
+    window.history.pushState(null, null, window.location.href);
+
+    // Prevent back navigation
+    const handlePopState = () => {
+      window.history.pushState(null, null, window.location.href);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
