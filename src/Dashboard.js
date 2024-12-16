@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // Import CSS for styling
 // import companyLogo from './images/cadmax.png'; // Path to the company logo
@@ -18,7 +18,7 @@ const CustomerDashboard = () => {
   const [activeTab, setActiveTab] = useState(storedActiveTab); // State to track active tab
   const [showNewCustomerForm, setShowNewCustomerForm] = useState(false); // State to toggle new customer form
   const [selectedDepartment, setSelectedDepartment] = useState(''); // State to track the selected department
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   // const formRef = useRef(); // Create a reference for the form
 
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false); // State for showing confirmation popup
@@ -26,13 +26,13 @@ const CustomerDashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-        navigate('/', { replace: true }); // Redirect to login if token is missing
+      navigate('/', { replace: true }); // Redirect to login if token is missing
     }
 
     // Prevent browser back button navigation
     const handlePopState = (event) => {
-        event.preventDefault();
-        window.history.pushState(null, '', window.location.href);
+      event.preventDefault();
+      window.history.pushState(null, '', window.location.href);
     };
 
     window.history.pushState(null, '', window.location.href);
@@ -40,9 +40,9 @@ const CustomerDashboard = () => {
 
     // Cleanup event listener on component unmount
     return () => {
-        window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('popstate', handlePopState);
     };
-}, [navigate]);
+  }, [navigate]);
 
   // State to store new customer form data
   const [customerData, setCustomerData] = useState({
@@ -62,12 +62,12 @@ const CustomerDashboard = () => {
     setSelectedDepartment(''); // Reset department selection
   };
 
-    // Function to handle the form reset
-    // const resetForm = () => {
-    //   if (formRef.current) {
-    //     formRef.current.reset(); // Resets all form fields
-    //   }
-    // };
+  // Function to handle the form reset
+  // const resetForm = () => {
+  //   if (formRef.current) {
+  //     formRef.current.reset(); // Resets all form fields
+  //   }
+  // };
 
   // Toggle between customer selection and new customer form
   const toggleNewCustomerForm = () => {
@@ -88,22 +88,22 @@ const CustomerDashboard = () => {
     }));
   };
 
- // Handle form submission with authorization
- const handleSubmit =  (e) => {
-  e.preventDefault();
-  setShowConfirmationPopup(true);
+  // Handle form submission with authorization
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setShowConfirmationPopup(true);
 
-  
-};
-// const API_URL = "http://ec2-54-226-181-87.compute-1.amazonaws.com:8000/"; // Replace with your EC2 instance's public IP or DNS
+
+  };
+  // const API_URL = "http://ec2-54-226-181-87.compute-1.amazonaws.com:8000/"; // Replace with your EC2 instance's public IP or DNS
 
   // Handle the action when user confirms the submission
-  const handleConfirmSubmit = async() => {
+  const handleConfirmSubmit = async () => {
     if (!authToken) {
       alert('User is not authenticated. Please login first.');
       return;
     }
-  
+
     try {
       const response = await fetch('https://kugtde.zapto.org/customer_register/', {
         method: 'POST',
@@ -113,20 +113,20 @@ const CustomerDashboard = () => {
         },
         body: JSON.stringify(customerData),
       });
-  
+
       if (response.ok) {
         setShowConfirmationPopup(false);
         alert('Customer Created Successfully');
         setActiveTab('customer'); // Switch back to the customer tab
         // Hide the NewCustomerForm
-      setShowNewCustomerForm(false); // Close the new customer form
-      // Optionally, clear the form or show success message
-      setCustomerData({
-        name: '',
-        company: '',
-        contact: '',
-        address: '',
-      }); // Clear form data after successful submission
+        setShowNewCustomerForm(false); // Close the new customer form
+        // Optionally, clear the form or show success message
+        setCustomerData({
+          name: '',
+          company: '',
+          contact: '',
+          address: '',
+        }); // Clear form data after successful submission
       } else {
         const errorData = await response.json();
         console.error('Error:', errorData.detail);
@@ -144,7 +144,7 @@ const CustomerDashboard = () => {
 
   return (
 
-    
+
     <div className="dashboard-layout">
       {/* Sidebar */}
       <div className="sidebar">
@@ -180,7 +180,7 @@ const CustomerDashboard = () => {
       <div className="main-content">
         <header className="header">
           <h1 className="company-title">CadMax Projects Pvt. Ltd.</h1>
-         <ProfileDropdown /> {/* Profile Dropdown Component */}
+          <ProfileDropdown /> {/* Profile Dropdown Component */}
         </header>
 
         {/* Conditionally Render Content based on activeTab */}
@@ -204,9 +204,9 @@ const CustomerDashboard = () => {
           {/* Confirmation Popup */}
           {showConfirmationPopup && (
             <ConfirmationPopup
-            customerData={customerData}
-            handleConfirmSubmit={handleConfirmSubmit}
-            handleCancelSubmit={handleCancelSubmit}
+              customerData={customerData}
+              handleConfirmSubmit={handleConfirmSubmit}
+              handleCancelSubmit={handleCancelSubmit}
             />
           )}
 
@@ -221,10 +221,10 @@ const CustomerDashboard = () => {
 
           {/* Working Tab */}
           {activeTab === 'attendance' && (
-            <AttendanceTab/>
+            <AttendanceTab />
           )}
 
-          
+
 
         </div>
 
@@ -232,7 +232,7 @@ const CustomerDashboard = () => {
 
 
     </div>
-    
+
   );
 };
 

@@ -25,6 +25,20 @@ function ProfileDropdown() {
     // Redirect to Sign-In page
     navigate('/', { replace: true });
     window.location.reload(); // Force reload to clear any cached content
+    
+    // Prevent browser back button navigation
+    const handlePopState = (event) => {
+      event.preventDefault();
+      window.history.pushState(null, '', window.location.href);
+    };
+
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', handlePopState);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
   };
 
 
