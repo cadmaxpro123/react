@@ -24,6 +24,7 @@ function ProfileDropdown() {
     
     // Redirect to Sign-In page
     navigate('/');
+    window.location.reload(); // Force reload to clear any cached content
   };
 
 

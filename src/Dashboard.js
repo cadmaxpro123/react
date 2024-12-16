@@ -21,6 +21,13 @@ const CustomerDashboard = () => {
 
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false); // State for showing confirmation popup
 
+   // Check authentication when the component loads
+   useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/'); // Redirect to login if the user is not authenticated
+    }
+  }, [navigate]);
 
   // State to store new customer form data
   const [customerData, setCustomerData] = useState({
