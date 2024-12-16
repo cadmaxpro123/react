@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // Import CSS for styling
 import companyLogo from './images/cadmax.png'; // Path to the company logo
 import CustomerSelection from './components/CustomerSelection';
@@ -17,6 +18,7 @@ const CustomerDashboard = () => {
   const [activeTab, setActiveTab] = useState(storedActiveTab); // State to track active tab
   const [showNewCustomerForm, setShowNewCustomerForm] = useState(false); // State to toggle new customer form
   const [selectedDepartment, setSelectedDepartment] = useState(''); // State to track the selected department
+  const navigate = useNavigate(); 
   // const formRef = useRef(); // Create a reference for the form
 
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false); // State for showing confirmation popup
