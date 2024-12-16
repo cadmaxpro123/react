@@ -1,8 +1,10 @@
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 
-const generateInvoice = () => {
+
+const generateInvoice = ({selectedDate,taskData}) => {
   const doc = new jsPDF();
+  let lastInvoiceNumber = 319;
 
   // Add Title
   doc.setFontSize(18);
@@ -20,13 +22,14 @@ const generateInvoice = () => {
   doc.setFont('helvetica', 'normal');
   
   // Indent remaining fields under the company name
-  doc.text("GST No.-08AAKCR9676A1ZZ", 30, 56);   // Add the second GST number if needed
+  // doc.text("GST No.-08AAKCR9676A1ZZ", 30, 56);   // Add the second GST number if needed
   doc.text("7th Floor, 709, Okay Plus Tower, Sector-7,", 30, 62);
   doc.text("Mansarovar, Jaipur, Rajasthan-302020", 30, 68);
 
+  lastInvoiceNumber += 1;
   // Add Invoice Information
-  doc.text("Invoice No.: 319/24", 150, 20);
-  doc.text("Date: 07/09/2024", 150, 26);
+  doc.text(`Invoice No.: ${lastInvoiceNumber}/24`, 150, 20);
+  doc.text(`Date: ${selectedDate}`, 150, 26);
 
   // Add Greeting
   doc.setFontSize(14);
@@ -40,24 +43,23 @@ const generateInvoice = () => {
       [
         "1",
         "VATIKA",
-        `Establishing and physically marking the location of proposed new 
-roads ROW/Street markings line marking in accordance respective reference with 
-Approved Master plan/Layout plans. On Dated-25/06/2024`,
-        "₹ 7,500.00",
-        "₹ 14,135.00",
+        `${taskData[selectedDate].Working}`,
+        "",
+        "",
       ],
       // Adding total calculations as rows in the table
       [
-        "", "", "(A) Total Amount", "", "₹ 14,135.00",
+        "", "", "(A) Total Amount", "", `${taskData[selectedDate].TotalCost}.00`,
       ],
       [
-        "", "", "(B) (i) CGST 9% On Total Amount", "", "₹ 1,272.00",
+        "", "", "(B) (i) CGST 9% On Total Amount", "", `${taskData[selectedDate].TotalCost*0.09}`,
       ],
       [
-        "", "", "(ii) SGST 9% On Total Amount", "", "₹ 1,272.00",
+        "", "", "(ii) SGST 9% On Total Amount", "", `${taskData[selectedDate].TotalCost*0.09}`,
       ],
+      
       [
-        "", "", "(C) Grand Total (A+B)", "", "₹ 16,679.00",
+        "", "", "(C) Grand Total (A+B)", "", `${parseFloat(taskData[selectedDate].TotalCost)+parseFloat(taskData[selectedDate].TotalCost*0.09*2)}`,
       ]
     ],
     theme: "grid",

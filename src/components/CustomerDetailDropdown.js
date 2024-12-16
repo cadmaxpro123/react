@@ -77,7 +77,7 @@ const CustomerDetailDropdown = () => {
                     {/* Generate Bill button inside the task details */}
                     <div className="generate-bill-container">
                         <button 
-                            onClick={() => generateInvoice(selectedDate)} 
+                            onClick={() => generateInvoice({selectedDate,taskData})} 
                             className="generate-bill-button"
                         >
                             Generate Bill

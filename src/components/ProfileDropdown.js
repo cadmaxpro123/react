@@ -20,7 +20,7 @@ function ProfileDropdown() {
    // Handle logout by clearing session data and redirecting to Sign-In page
    const handleLogout = () => {
     // Clear any session data (for example, JWT token) if you have it
-    localStorage.removeItem('authToken'); // Example for token removal, you can adjust based on your app's logic
+    localStorage.removeItem('token'); // Example for token removal, you can adjust based on your app's logic
     
     // Redirect to Sign-In page
     navigate('/');
