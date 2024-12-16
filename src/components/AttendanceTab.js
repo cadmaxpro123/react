@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AttendanceTab.css';  // Import the CSS for styling
-import mapLogo from '../images/maplogo.png';  // Import the map logo
+// import mapLogo from '../images/maplogo.png';  // Import the map logo
 
 const AttendanceTab = () => {
   const [Address, setAddress] = useState('');  // State for employee address
@@ -186,7 +186,7 @@ const AttendanceTab = () => {
               />
               {/* Map logo image */}
               <img
-                src={mapLogo}
+                src="/images/maplogo.png"
                 alt="Map Logo"
                 className="map-logo"
                 onClick={handleLocationClick} // Trigger location access request on click

@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // Import CSS for styling
-import companyLogo from './images/cadmax.png'; // Path to the company logo
+// import companyLogo from './images/cadmax.png'; // Path to the company logo
 import CustomerSelection from './components/CustomerSelection';
 import NewCustomerForm from './components/NewCustomerForm';
 import ConfirmationPopup from './components/ConfirmationPopup';
@@ -23,13 +23,26 @@ const CustomerDashboard = () => {
 
   const [showConfirmationPopup, setShowConfirmationPopup] = useState(false); // State for showing confirmation popup
 
-   // Check authentication when the component loads
-   useEffect(() => {
+  useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/'); // Redirect to login if the user is not authenticated
+        navigate('/', { replace: true }); // Redirect to login if token is missing
     }
-  }, [navigate]);
+
+    // Prevent browser back button navigation
+    const handlePopState = (event) => {
+        event.preventDefault();
+        window.history.pushState(null, '', window.location.href);
+    };
+
+    window.history.pushState(null, '', window.location.href);
+    window.addEventListener('popstate', handlePopState);
+
+    // Cleanup event listener on component unmount
+    return () => {
+        window.removeEventListener('popstate', handlePopState);
+    };
+}, [navigate]);
 
   // State to store new customer form data
   const [customerData, setCustomerData] = useState({
@@ -136,7 +149,7 @@ const CustomerDashboard = () => {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="logo-container">
-          <img src={companyLogo} alt="Company Logo" className="company-logo" />
+          <img src="/images/cadmax.png" alt="Company Logo" className="company-logo" />
         </div>
         <nav className="nav-links">
           <a

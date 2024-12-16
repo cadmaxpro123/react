@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SignIn.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import companyLogo from './images/cadmax.png';
-import githubLogo from './images/github.jfif';
-import facebookLogo from './images/facebook.jfif';
-import googleLogo from './images/google.jfif';
-import appleLogo from './images/apple.jfif';
+// import companyLogo from './images/cadmax.png';
+// import githubLogo from './images/github.jfif';
+// import facebookLogo from './images/facebook.jfif';
+// import googleLogo from './images/google.jfif';
+// import appleLogo from './images/apple.jfif';
 import { FaCaretDown } from 'react-icons/fa';
 
 const SignIn = () => {
@@ -44,7 +44,11 @@ const SignIn = () => {
       // Store the access token and token type in localStorage
       localStorage.setItem('token', access_token);
       // Navigate to the dashboard after successful login
-      navigate('/dashboard');
+      if(access_token){
+
+        navigate('/dashboard', { replace: true });
+        window.history.replaceState(null, '', '/dashboard'); // Ensure the history stack is updated
+      }
     } else {
       // Handle login failure
       alert('Login failed');
@@ -95,7 +99,7 @@ const SignIn = () => {
   return (
     <div className="sign-in-container">
       <div className="sign-in-box">
-        <img src={companyLogo} alt="Company Logo" className="company-logo" />
+        <img src="/images/cadmax.png" alt="Company Logo" className="company-logo" />
 
         <div className="sign-in-form">
           <h2>Sign In</h2>
@@ -186,28 +190,28 @@ const SignIn = () => {
 
           <div className="logos-container">
             <img
-              src={githubLogo}
+              src="/images/github.jfif"
               alt="GitHub"
               className="logo"
               onClick={() => window.location.href = 'https://github.com'}
             />
             <div className="logo-divider"></div>
             <img
-              src={facebookLogo}
+              src="/images/facebook.jfif"
               alt="Facebook"
               className="logo"
               onClick={() => window.location.href = 'https://facebook.com'}
             />
             <div className="logo-divider"></div>
             <img
-              src={googleLogo}
+              src="/images/google.jfif"
               alt="Google"
               className="logo"
               onClick={() => window.location.href = 'https://google.com'}
             />
             <div className="logo-divider"></div>
             <img
-              src={appleLogo}
+              src="/images/apple.jfif"
               alt="Apple"
               className="logo"
               onClick={() => window.location.href = 'https://apple.com'}

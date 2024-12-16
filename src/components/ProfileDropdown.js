@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../Dashboard.css';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
-import profileLogo from '../images/profile_logo.jpg'
+// import profileLogo from '../images/profile_logo.jpg'
 
 function ProfileDropdown() {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -23,7 +23,7 @@ function ProfileDropdown() {
     localStorage.removeItem('token'); // Example for token removal, you can adjust based on your app's logic
     
     // Redirect to Sign-In page
-    navigate('/');
+    navigate('/', { replace: true });
     window.location.reload(); // Force reload to clear any cached content
   };
 
@@ -31,7 +31,7 @@ function ProfileDropdown() {
   return (
     <div className="profile-container">
       <div className="profile-icon" onClick={handleProfileClick}>
-      <img src={profileLogo} alt="Profile" className="profile-logo" />
+      <img src="/images/profile_logo.jpg" alt="Profile" className="profile-logo" />
       </div>
 
      
