@@ -27,7 +27,7 @@ const CustomerDetailDropdown = () => {
                         Authorization: `Bearer ${authToken}`, // Attach token to the request header
                     },
                 });
-                setDepartments(response.data.departments || []); // Update state with department names
+                setDepartments(response.data || []); // Update state with department names
             } catch (error) {
                 console.error('Error fetching departments:', error);
                 setDepartments([]);
