@@ -1,36 +1,62 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';  // For handling dynamic routes
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; // For handling dynamic routes
 import './WorkingDataDropdowns.css';
 import axios from 'axios';
-import { jsPDF } from 'jspdf'; // Import jsPDF
-import generateInvoice from './GenerateBill'
+// import { jsPDF } from 'jspdf'; // Import jsPDF
+import generateInvoice from './GenerateBill';
 
 const CustomerDetailDropdown = () => {
-    const { name } = useParams();  // Extract the customer name from URL
-    const [taskData, setTaskData] = useState({});  // Store task data for the selected date
-    const [selectedDate, setSelectedDate] = useState('');  // Store selected date
+    const { name } = useParams(); // Extract the customer name from URL
+    const [taskData, setTaskData] = useState({}); // Store task data for the selected date
+    const [selectedDate, setSelectedDate] = useState(''); // Store selected date
+    const [departments, setDepartments] = useState([]); // Store department names
+    const [selectedDepartment, setSelectedDepartment] = useState(''); // Store selected department
 
-    // Retrieve the authentication token from localStorage or context
-    const authToken = localStorage.getItem('token'); // Adjust this if you're using Context or Redux
+    const authToken = localStorage.getItem('token'); // Retrieve the authentication token
 
-    // Fetch task data for a specific date when it's selected
-    const fetchTaskData = async (date) => {
+    useEffect(() => {
+        const fetchDepartments = async () => {
+            if (!authToken || !selectedDate) {
+                console.error('User is not authenticated or date is not selected');
+                setDepartments([]);
+                return;
+            }
+            try {
+                const response = await axios.get(`https://kugtde.zapto.org/forms/?date=${selectedDate}&name=${name}`, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`, // Attach token to the request header
+                    },
+                });
+                setDepartments(response.data.departments || []); // Update state with department names
+            } catch (error) {
+                console.error('Error fetching departments:', error);
+                setDepartments([]);
+
+            }
+        };
+
+        if (selectedDate) {
+            fetchDepartments(); // Fetch departments on mount
+        }
+    }, [authToken, selectedDate, name]);
+
+    const fetchTaskData = async (date, department) => {
         if (!authToken) {
             console.error('User is not authenticated. Token is missing.');
             return;
         }
 
         try {
-            const response = await axios.get(`https://kugtde.zapto.org/customer_working/?date=${date}&name=${name}`, {
-                headers: {
-                    'Authorization': `Bearer ${authToken}`, // Attach token to the request header
+            const response = await axios.get(
+                `https://kugtde.zapto.org/customer_working/?date=${date}&Department=${department}&name=${name}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`, // Attach token to the request header
+                    },
                 }
-            });
+            );
             console.log('Fetched task data:', response.data); // Check the API response
 
-            const { Department,  ...taskWithoutClient } = response.data;
-
-            // Update taskData for the specific date
             setTaskData((prevData) => ({
                 ...prevData,
                 [date]: response.data, // Update data for the selected date
@@ -40,32 +66,69 @@ const CustomerDetailDropdown = () => {
         }
     };
 
-    // Handle date selection and fetch task data
     const handleDateChange = (event) => {
         const selectedDate = event.target.value;
         setSelectedDate(selectedDate);
-        fetchTaskData(selectedDate);  // Fetch data for the selected date
+        if (selectedDepartment) {
+            fetchTaskData(selectedDate, selectedDepartment);
+        }
     };
 
-
+    const handleDepartmentChange = (event) => {
+        const selectedDept = event.target.value;
+        setSelectedDepartment(selectedDept);
+        if (selectedDate) {
+            fetchTaskData(selectedDate, selectedDept);
+        }
+    };
 
     return (
         <div className="working-data-container">
-            <h2 className="working-data-header">Select Customer Data for a Specific Date</h2>
-            
-            {/* Date picker for selecting a date */}
-            <div className="date-picker-wrapper">
-                <label htmlFor="date-picker" className="date-picker-label">Select Date:</label>
-                <input
-                    type="date"
-                    id="date-picker"
-                    value={selectedDate}
-                    onChange={handleDateChange}
-                    className="date-picker-input"
-                />
+            <h2 className="working-data-header">Select Customer Data</h2>
+
+            {/* Date picker and department dropdown container */}
+            <div className="input-fields-container">
+
+                {/* Date picker */}
+                <div className="field-wrapper">
+                    <label htmlFor="date-picker" className="field-label">Select Date:</label>
+                    <input
+                        type="date"
+                        id="date-picker"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        className="field-input"
+                    />
+                </div>
+
+                {/* Department dropdown */}
+                <div className="field-wrapper">
+                <label htmlFor="date-picker" className="field-label">Select Department</label>
+                    <select
+                        id="department-dropdown"
+                        value={selectedDepartment}
+                        onChange={handleDepartmentChange}
+                        className="field-input"
+                        disabled={departments.length === 0} // Disable the dropdown if no departments
+                    >   
+                        
+                        <option value="" disabled>Select Department</option>
+                        {departments.length === 0 ? (
+                            <option disabled>No departments available</option>
+                        ) : (
+                                departments.map((dept, index) => (
+                                    <option key={index} value={dept}>
+                                        {dept}
+                                    </option>
+                                ))
+                            )}
+                    </select>
+                </div>
+
+                
             </div>
 
-            {/* Display task data for the selected date */}
+            {/* Display task data for the selected date and department */}
             {selectedDate && taskData[selectedDate] && (
                 <div className="task-details">
                     <div><strong>Department:</strong> {taskData[selectedDate].Department}</div>
@@ -74,10 +137,10 @@ const CustomerDetailDropdown = () => {
                     <div><strong>Staff:</strong> {taskData[selectedDate].Staff || 'N/A'}</div>
                     <div><strong>Area:</strong> {taskData[selectedDate].TotalArea || 'N/A'}</div>
 
-                    {/* Generate Bill button inside the task details */}
+                    {/* Generate Bill button */}
                     <div className="generate-bill-container">
-                        <button 
-                            onClick={() => generateInvoice({selectedDate,taskData})} 
+                        <button
+                            onClick={() => generateInvoice({ selectedDate, taskData })}
                             className="generate-bill-button"
                         >
                             Generate Bill
@@ -86,7 +149,7 @@ const CustomerDetailDropdown = () => {
                 </div>
             )}
 
-            {/* Display message if no task is available for the selected date */}
+            {/* Display message if no task is available */}
             {selectedDate && !taskData[selectedDate] && (
                 <div className="no-task">
                     No task available for this day.

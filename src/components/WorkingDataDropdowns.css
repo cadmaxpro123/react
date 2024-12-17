@@ -254,3 +254,51 @@
 
 
 
+.input-fields-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* Align fields by their bottom edges */
+  margin-bottom: 20px;
+  gap: 20px; /* Add spacing between the fields */
+}
+
+.field-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Ensure equal width for both fields */
+}
+
+.field-label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.field-input {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%; /* Makes input responsive */
+  max-width: 300px; /* Optional: Limit maximum width */
+}
+
+@media (max-width: 768px) {
+  .input-fields-container {
+      flex-direction: column; /* Stack fields vertically on smaller screens */
+  }
+
+  .field-wrapper {
+      margin-bottom: 15px;
+  }
+}
+
+
+.generate-bill-container {
+  margin-top: 20px;
+}
+
+.no-task {
+  margin-top: 20px;
+  color: #d9534f;
+  font-weight: bold;
+}
