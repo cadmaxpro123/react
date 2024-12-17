@@ -27,16 +27,17 @@ const CustomerDetailDropdown = () => {
                         Authorization: `Bearer ${authToken}`, // Attach token to the request header
                     },
                 });
-                console.log('Fetched departments:', response.data);
-                setDepartments(response.data.departments || []); // Update state with department names
+                console.log(response.data);
+                setDepartments(response.data || []); // Update state with department names
+                console.log(departments);
             } catch (error) {
                 console.error('Error fetching departments:', error);
                 setDepartments([]);
+
             }
         };
-        
         if (selectedDate) {
-            fetchDepartments(); // Fetch departments when date is selected
+            fetchDepartments(); // Fetch departments on mount
         }
     }, [authToken, selectedDate, name]);
 
@@ -78,7 +79,6 @@ const CustomerDetailDropdown = () => {
         const selectedDept = event.target.value;
         setSelectedDepartment(selectedDept);
         if (selectedDate) {
-            // Fetch task data after selecting a department
             fetchTaskData(selectedDate, selectedDept);
         }
     };
@@ -102,26 +102,28 @@ const CustomerDetailDropdown = () => {
                 </div>
                 {/* Department dropdown */}
                 <div className="field-wrapper">
-                    <label htmlFor="date-picker" className="field-label">Select Department</label>
+                <label htmlFor="date-picker" className="field-label">Select Department</label>
                     <select
                         id="department-dropdown"
                         value={selectedDepartment}
                         onChange={handleDepartmentChange}
                         className="field-input"
-                        disabled={departments.length === 0} // Disable dropdown if no departments
-                    >
+                        disabled={departments.length === 0} // Disable the dropdown if no departments
+                    >   
+                        
                         <option value="" disabled>Select Department</option>
                         {departments.length === 0 ? (
                             <option disabled>No departments available</option>
                         ) : (
-                            departments.map((dept, index) => (
-                                <option key={index} value={dept}>
-                                    {dept}
-                                </option>
-                            ))
-                        )}
+                                departments.map((dept, index) => (
+                                    <option key={index} value={dept}>
+                                        {dept}
+                                    </option>
+                                ))
+                            )}
                     </select>
                 </div>
+
             </div>
 
             {/* Display task data for the selected date and department */}
