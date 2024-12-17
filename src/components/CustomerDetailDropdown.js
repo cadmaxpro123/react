@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'; // For handling dynamic routes
 import './WorkingDataDropdowns.css';
 import axios from 'axios';
-// import { jsPDF } from 'jspdf'; // Import jsPDF
+import { jsPDF } from 'jspdf'; // Import jsPDF
 import generateInvoice from './GenerateBill';
 
 const CustomerDetailDropdown = () => {
@@ -27,14 +27,15 @@ const CustomerDetailDropdown = () => {
                         Authorization: `Bearer ${authToken}`, // Attach token to the request header
                     },
                 });
+                console.log(response.data);
                 setDepartments(response.data || []); // Update state with department names
+                console.log(departments);
             } catch (error) {
                 console.error('Error fetching departments:', error);
                 setDepartments([]);
 
             }
         };
-
         if (selectedDate) {
             fetchDepartments(); // Fetch departments on mount
         }
@@ -88,10 +89,9 @@ const CustomerDetailDropdown = () => {
 
             {/* Date picker and department dropdown container */}
             <div className="input-fields-container">
-
                 {/* Date picker */}
                 <div className="field-wrapper">
-                    <label htmlFor="date-picker" className="field-label">Select Date:</label>
+                    <label htmlFor="date-picker" className="field-label">Select Date</label>
                     <input
                         type="date"
                         id="date-picker"
@@ -100,7 +100,6 @@ const CustomerDetailDropdown = () => {
                         className="field-input"
                     />
                 </div>
-
                 {/* Department dropdown */}
                 <div className="field-wrapper">
                 <label htmlFor="date-picker" className="field-label">Select Department</label>
@@ -125,7 +124,6 @@ const CustomerDetailDropdown = () => {
                     </select>
                 </div>
 
-                
             </div>
 
             {/* Display task data for the selected date and department */}
